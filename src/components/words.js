@@ -2,11 +2,9 @@ import React from 'react';
 import { getWords, getDefs } from '../utils/getData';
 // import '../../assets/styles.css'
 import { apiKey } from './../../key.js';
-console.log(apiKey);
+
 const url = `https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=%20proper-noun&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=10&maxLength=-1&limit=4&api_key=${apiKey}`;
 const urlDefs = ``;
-
-const Definitions = props => <li className="definition">{props.definition}</li>;
 
 class Words extends React.Component {
   constructor(props) {
@@ -30,12 +28,30 @@ class Words extends React.Component {
     return (
       <div>
         <h2>{keys[0]}</h2>
-        <ul className="definitionList">
-          {keys.map(key => <li key={key}> {this.state.words[key]}</li>)}
-        </ul>
+        <form>
+          {keys.map(key => {
+            return (
+              <div>
+                <label htmlFor={this.state.words[key]}>
+                  {this.state.words[key]}
+                </label>
+                <input
+                  type="radio"
+                  name="definition"
+                  id={this.state.words[key]}
+                />
+              </div>
+            );
+          })}
+          <button type="submit">Submit</button>
+        </form>
       </div>
     );
   }
 }
-
+// {keys.map(key => <li key={key}> {this.state.words[key]}</li>)}
+// {<div>
+// <label for={this.state.words[key]}>{this.state.words[key]}</label>
+// <input type="radio" id={this.state.words[key]} />
+// </div>;}
 export default Words;

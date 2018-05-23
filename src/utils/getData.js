@@ -18,14 +18,16 @@ export const getWords = url => {
   return fetch(`${url}`)
     .then(checkResponse)
     .then(resp => {
-      resp.forEach(object => {
-        const word = object.word;
+      const promiseArray = resp.map(({ word }) => {
         obj[word] = '';
-        fetch(formatUrl(word))
-          .then(checkResponse)
-          .then(result => {
-            obj[word] = result[0].text;
-          });
+        return fetch(formatUrl(word)).then(checkResponse);
+      });
+      return Promise.all(promiseArray);
+    })
+    .then(definitionsArr => {
+      definitionsArr.forEach(def => {
+        const { word, text } = def[0];
+        obj[word] = text;
       });
       return obj;
     })

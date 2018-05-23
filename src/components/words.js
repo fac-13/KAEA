@@ -26,13 +26,7 @@ class Words extends React.Component {
     if (!this.state.words) {
       return <h3> ...loading</h3>;
     }
-
     const keys = Object.keys(this.state.words);
-    const values = Object.values(this.state.words);
-    console.log('values', values);
-    console.log('WORDStwo', this.state.words);
-    console.log('KEYS', keys);
-
     return (
       <div>
         <h2>{keys[0]}</h2>

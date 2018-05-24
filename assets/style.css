@@ -1,0 +1,20 @@
+body {
+  background: #a1ffab;
+}
+
+#root {
+  border: 3px solid #e85b0c;
+  width: 50%;
+  min-width: 700px;
+  margin: auto;
+  margin-top: 12rem;
+}
+
+.definitions {
+  display: flex;
+}
+
+.definitions input {
+  border: 2px solid red;
+  color: red;
+}

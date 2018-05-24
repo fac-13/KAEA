@@ -19,26 +19,43 @@ const Definitions = props => (
 
 const Score = props => <div>{props.score}</div>;
 
+const Form = props => (
+  <div>
+    <h2>{props.word}</h2>
+    <form onSubmit={props.verify}>
+      {props.questNum}
+      {props.keys.map(key => (
+        <Definitions key={key} definition={props.definition[key]} />
+      ))}
+      <button type="submit" onClick={props.callApi}>
+        Submit
+      </button>
+    </form>
+  </div>
+);
 
 //--------------------------------------------------------------------------------------------------
 class Words extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: null,
+      words: null
       // score: 0
     };
     this.verify = this.verify.bind(this);
   }
-  componentDidMount() {
+  submitApi = () => {
     getWords(url).then(data => {
       this.setState({ words: data });
     });
-  }
+  };
+  componentDidMount = () => {
+    this.submitApi();
+  };
 
   verify = event => {
-    this.props.question();
     event.preventDefault();
+    this.props.question();
     const form = [...event.target.children].filter(
       item => item.innerHTML !== 'Submit'
     );
@@ -54,7 +71,6 @@ class Words extends React.Component {
         // this.refreshPage();
       }
     });
-
   };
 
   // refreshPage = () => {
@@ -65,18 +81,19 @@ class Words extends React.Component {
     if (!this.state.words) {
       return <h3> ...loading</h3>;
     }
+
     const keys = Object.keys(this.state.words);
     return (
       <div>
         <Score score={this.props.score} />
-        <h2>{keys[0]}</h2>
-        <form onSubmit={this.verify}>
-        {/* <p>{ this.props.score }</p> */}
-          {keys.map(key => (
-            <Definitions key={key} definition={this.state.words[key]} />
-          ))}
-          <button type="submit">Submit</button>
-        </form>
+        <Form
+          word={keys[0]}
+          definition={this.state.words}
+          verify={this.verify}
+          questNum={this.props.questNum}
+          keys={keys}
+          callApi={this.submitApi}
+        />
       </div>
     );
   }

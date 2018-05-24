@@ -4,7 +4,6 @@ import { getWords, getDefs } from '../utils/getData';
 import { apiKey } from './../../key.js';
 
 const url = `https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=%20proper-noun&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=10&maxLength=-1&limit=4&api_key=${apiKey}`;
-const urlDefs = ``;
 
 const Definitions = props => (
   <div>
@@ -18,14 +17,16 @@ const Definitions = props => (
   </div>
 );
 
+const Score = props => <div>{props.score}</div>;
+
+//--------------------------------------------------------------------------------------------------
 class Words extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       words: null,
-      selectedOption: null
+      score: 0
     };
-    this.getAnswer = this.getAnswer.bind(this);
     this.verify = this.verify.bind(this);
   }
   componentDidMount() {
@@ -34,8 +35,7 @@ class Words extends React.Component {
     });
   }
 
-  getAnswer = event => {
-    var answer;
+  verify = event => {
     event.preventDefault();
     const form = [...event.target.children].filter(
       item => item.innerHTML !== 'Submit'
@@ -43,29 +43,34 @@ class Words extends React.Component {
     form.map(item => {
       const child = [...item.children];
       if (child[1].checked === true) {
-        answer = child[1].value;
+        const keys = Object.keys(this.state.words);
+        const correctAnswer = this.state.words[keys[0]];
+        const answer = child[1].value;
+        if (answer === correctAnswer) {
+          this.setState(prevState => {
+            return { score: prevState.score + 10 };
+          });
+        }
+        this.refreshPage();
       }
-    });
-    this.setState(() => {
-      return { selectedOption: answer };
     });
   };
 
-  verify = () => {
-    console.log('verify', this.state.selectedOption);
+  refreshPage = () => {
+    console.log('inside refresh');
+    this.render();
   };
 
   render() {
-    console.log('changed', this.state.selectedOption);
-
     if (!this.state.words) {
       return <h3> ...loading</h3>;
     }
     const keys = Object.keys(this.state.words);
     return (
       <div>
+        <Score score={this.state.score} />
         <h2>{keys[0]}</h2>
-        <form onSubmit={this.getAnswer}>
+        <form onSubmit={this.verify}>
           {keys.map(key => (
             <Definitions key={key} definition={this.state.words[key]} />
           ))}

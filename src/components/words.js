@@ -39,6 +39,7 @@ class Words extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      word: null,
       words: null
       // score: 0
     };
@@ -53,6 +54,7 @@ class Words extends React.Component {
     this.submitApi();
   };
 
+
   verify = event => {
     event.preventDefault();
     this.props.question();
@@ -63,9 +65,10 @@ class Words extends React.Component {
       const child = [...item.children];
       if (child[1].checked === true) {
         const keys = Object.keys(this.state.words);
+        console.log(keys);
         const correctAnswer = this.state.words[keys[0]];
         const answer = child[1].value;
-        if (answer === correctAnswer) {
+        if (correctAnswer===answer) {
           this.props.action();
         }
         // this.refreshPage();
@@ -76,13 +79,26 @@ class Words extends React.Component {
   // refreshPage = () => {
   //   console.log('inside refresh')
   // };
+  shuffle = keys => {
+console.log('keys pre shuffle', keys)
+    var currentIndex = keys.length, temporaryValue, randomIndex;
 
+  while (0 !== currentIndex) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
+    temporaryValue = keys[currentIndex];
+    keys[currentIndex] = keys[randomIndex];
+    keys[randomIndex] = temporaryValue;
+  }
+  console.log('keys been shuffled', keys);
+  return keys;
+  }
   render() {
     if (!this.state.words) {
       return <h3> ...loading</h3>;
     }
-
     const keys = Object.keys(this.state.words);
+    const shuffledKeys = this.shuffle([...keys]);
     return (
       <div>
         <Score score={this.props.score} />
@@ -91,7 +107,7 @@ class Words extends React.Component {
           definition={this.state.words}
           verify={this.verify}
           questNum={this.props.questNum}
-          keys={keys}
+          keys={shuffledKeys}
           callApi={this.submitApi}
         />
       </div>

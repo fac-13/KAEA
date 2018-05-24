@@ -12,6 +12,7 @@ body {
 
 .definitions {
   display: flex;
+  background-color: red;
 }
 
 .definitions input {

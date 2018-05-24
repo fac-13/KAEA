@@ -1,8 +1,8 @@
 import React from 'react';
-import Words from './components/words';
+import Quiz from './components/quiz';
 
 export default class App extends React.Component {
   render() {
-    return <Words />;
+    return <Quiz />;
   }
 }

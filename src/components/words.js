@@ -9,7 +9,12 @@ const urlDefs = ``;
 const Definitions = props => (
   <div>
     <label htmlFor={props.definition}>{props.definition} </label>
-    <input type="radio" name="description" id={props.definition} />
+    <input
+      type="radio"
+      name="description"
+      value={props.definition}
+      id={props.definition}
+    />
   </div>
 );
 
@@ -17,15 +22,42 @@ class Words extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      words: null
+      words: null,
+      selectedOption: null
     };
+    this.getAnswer = this.getAnswer.bind(this);
+    this.verify = this.verify.bind(this);
   }
   componentDidMount() {
     getWords(url).then(data => {
       this.setState({ words: data });
     });
   }
+
+  getAnswer = event => {
+    var answer;
+    event.preventDefault();
+    const form = [...event.target.children].filter(
+      item => item.innerHTML !== 'Submit'
+    );
+    form.map(item => {
+      const child = [...item.children];
+      if (child[1].checked === true) {
+        answer = child[1].value;
+      }
+    });
+    this.setState(() => {
+      return { selectedOption: answer };
+    });
+  };
+
+  verify = () => {
+    console.log('verify', this.state.selectedOption);
+  };
+
   render() {
+    console.log('changed', this.state.selectedOption);
+
     if (!this.state.words) {
       return <h3> ...loading</h3>;
     }
@@ -33,7 +65,7 @@ class Words extends React.Component {
     return (
       <div>
         <h2>{keys[0]}</h2>
-        <form>
+        <form onSubmit={this.getAnswer}>
           {keys.map(key => (
             <Definitions key={key} definition={this.state.words[key]} />
           ))}

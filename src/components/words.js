@@ -19,13 +19,14 @@ const Definitions = props => (
 
 const Score = props => <div>{props.score}</div>;
 
+
 //--------------------------------------------------------------------------------------------------
 class Words extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       words: null,
-      score: 0
+      // score: 0
     };
     this.verify = this.verify.bind(this);
   }
@@ -36,6 +37,7 @@ class Words extends React.Component {
   }
 
   verify = event => {
+    this.props.question();
     event.preventDefault();
     const form = [...event.target.children].filter(
       item => item.innerHTML !== 'Submit'
@@ -47,19 +49,17 @@ class Words extends React.Component {
         const correctAnswer = this.state.words[keys[0]];
         const answer = child[1].value;
         if (answer === correctAnswer) {
-          this.setState(prevState => {
-            return { score: prevState.score + 10 };
-          });
+          this.props.action();
         }
-        this.refreshPage();
+        // this.refreshPage();
       }
     });
+
   };
 
-  refreshPage = () => {
-    console.log('inside refresh');
-    this.render();
-  };
+  // refreshPage = () => {
+  //   console.log('inside refresh')
+  // };
 
   render() {
     if (!this.state.words) {
@@ -68,9 +68,10 @@ class Words extends React.Component {
     const keys = Object.keys(this.state.words);
     return (
       <div>
-        <Score score={this.state.score} />
+        <Score score={this.props.score} />
         <h2>{keys[0]}</h2>
         <form onSubmit={this.verify}>
+        {/* <p>{ this.props.score }</p> */}
           {keys.map(key => (
             <Definitions key={key} definition={this.state.words[key]} />
           ))}

@@ -18,7 +18,7 @@ const Definitions = props => (
   </div>
 );
 
-const Score = props => <div className="score">SCORE: {props.score}</div>;
+const Score = props => <h2 className="score">SCORE: {props.score}</h2>;
 
 const Form = props => (
   <div className="definitions">

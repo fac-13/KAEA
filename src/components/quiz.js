@@ -18,6 +18,9 @@ class Quiz extends React.Component {
     score += 10;
     this.setState({ score });
   };
+  reset = () => {
+    this.setState({ score: 0 });
+  };
 
   question = () => {
     console.log('we have incremented q');
@@ -30,6 +33,7 @@ class Quiz extends React.Component {
       <div>
         <Words
           action={this.score}
+          reset={this.reset}
           score={this.state.score}
           question={this.question}
           questNum={this.state.questNum}

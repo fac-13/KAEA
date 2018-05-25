@@ -69,6 +69,8 @@ class Words extends React.Component {
         const answer = child[1].value;
         if (correctAnswer === answer) {
           this.props.action();
+        } else {
+          this.props.reset();
         }
         // this.refreshPage();
       }

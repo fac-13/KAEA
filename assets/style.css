@@ -9,17 +9,28 @@ body {
   width: 60%;
 }
 
+
 .definitions {
   background-color: linen;
   border: 3px solid #e85b0c;
   padding: 3rem;
 }
 
-.definitions input {
-  border: 2px solid red;
-  color: red;
-  width: 20%;
-  padding: 2rem;
+.definitions input[type="radio"]:not(old){
+  -webkit-appearance: none;
+  width            : 2em;
+  height           : 2em;
+  margin           : 0.25em 0.5em 0.25em 0.25em;
+  border           : 0.1rem solid rgb(4,8,192);
+  border-radius    : 1em;
+  background       :yellow;
+  outline: none;
+  vertical-align:middle;
+}
+
+.definitions input[type="radio"]:checked {
+  background-color: green;
+  outline: none;
 }
 
 .score {

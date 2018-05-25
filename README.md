@@ -1,4 +1,7 @@
 # KAEA
+
+[Try it!](https://awesome-stonebraker-0eb3c0.netlify.com/)
+
 This project was built using React, the game requires you guess the definition of a word to increase your score.
 
 This quiz uses [Wordnik](https://developer.wordnik.com/) API.
@@ -13,4 +16,4 @@ You will see your score increase (if you chose right) or drop to **zero** (if yo
 
 The game is infinite, close it whenever you want.
 
-https://awesome-stonebraker-0eb3c0.netlify.com/
+

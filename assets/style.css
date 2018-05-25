@@ -3,19 +3,33 @@ body {
 }
 
 #root {
-  border: 3px solid #e85b0c;
-  width: 50%;
   min-width: 700px;
   margin: auto;
   margin-top: 12rem;
+  width: 60%;
 }
 
 .definitions {
-  display: flex;
-  background-color: red;
+  background-color: linen;
+  border: 3px solid #e85b0c;
+  padding: 3rem;
 }
 
 .definitions input {
   border: 2px solid red;
   color: red;
+  width: 20%;
+  padding: 2rem;
+}
+
+.score {
+  border: 6px dashed red;
+  margin: 2rem;
+  padding: 2rem;
+  font-size: 2rem;
+  width: 30%;
+}
+h2 {
+  color: sienna;
+  display: block;
 }

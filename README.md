@@ -13,3 +13,4 @@ You will see your score increase (if you chose right) or drop to **zero** (if yo
 
 The game is infinite, close it whenever you want.
 
+https://awesome-stonebraker-0eb3c0.netlify.com/

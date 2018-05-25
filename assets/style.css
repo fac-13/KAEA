@@ -1,35 +1,52 @@
 body {
-  background: #a1ffab;
+  background: rgb(255, 195, 205);
+  font-family: sans-serif;
+  font-size: 15px;
+  color: grey;
 }
 
 #root {
   min-width: 700px;
+  text-align: right;
+  margin-top: 7rem;
+  width: 50%;
   margin: auto;
-  margin-top: 12rem;
-  width: 60%;
 }
 
 .definitions {
   background-color: linen;
-  border: 3px solid #e85b0c;
-  padding: 3rem;
+  border: 9px solid rgb(235, 146, 95);
+  padding: 1rem;
+  width: 80%;
+  margin: auto;
+  padding: auto;
 }
 
 .definitions input {
-  border: 2px solid red;
-  color: red;
   width: 20%;
-  padding: 2rem;
+  padding: 0.4rem;
 }
 
 .score {
-  border: 6px dashed red;
-  margin: 2rem;
+  border: 9px dashed rgb(235, 146, 95);
+
   padding: 2rem;
   font-size: 2rem;
-  width: 30%;
+  width: 75%;
+  margin: 2rem auto;
+  text-align: right;
 }
 h2 {
-  color: sienna;
   display: block;
+  text-transform: uppercase;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+button {
+  padding: 1rem;
+  margin: 1rem;
+  margin-right: 2rem;
+  background-color: palegoldenrod;
+  border: 9px solid rgb(235, 146, 95);
 }

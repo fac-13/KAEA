@@ -7,7 +7,7 @@
     "test": "jest --coverage",
     "t": "jest --watch",
     "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "build": "parcel build index.html --public-url ./"
   },
   "author": "",
   "license": "ISC",

@@ -6,7 +6,7 @@ import { apiKey } from './../../key.js';
 const url = `https://api.wordnik.com/v4/words.json/randomWords?hasDictionaryDef=true&excludePartOfSpeech=%20proper-noun&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=10&maxLength=-1&limit=4&api_key=${apiKey}`;
 
 const Definitions = props => (
-  <div className="definitions">
+  <div>
     <label htmlFor={props.definition}>{props.definition} </label>
     <input
       type="radio"
@@ -18,7 +18,7 @@ const Definitions = props => (
   </div>
 );
 
-const Score = props => <div className="score">SCORE: {props.score}</div>;
+const Score = props => <h2 className="score">SCORE: {props.score}</h2>;
 
 const Form = props => (
   <div className="definitions">
